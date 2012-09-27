@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+        <!-- algorithm.activation.threshold: activation threshold for firing a node -->
+        <property>
+                <name>algorithm.activation.threshold</name>
+                <value>0.6</value>
+                <final>true</final>
+        </property>
+       
+        <!-- algorithm.activation.default: default nodes activation -->
+        <property>
+                <name>algorithm.activation.default</name>
+                <value>0.0</value>
+                <final>true</final>
+        </property>
+        
+        <!-- algorithm.activated.default: nodes are not activated by default -->
+        <property>
+        		<name>algorithm.activated.default</name>
+        		<value>false</value>
+        		<fina>true</final>
+        </property>
+       
+        <!-- algorithm.weight.default: default vertices weight -->
+        <property>
+                <name>algorithm.weight.default</name>
+                <value>1.0</value>
+                <final>true</final>
+        </property>
+       
+        <!-- algorithm.iterations: number of activation cycles, if zero iterate until no activated nodes -->
+        <property>      
+                <name>algorithm.iterations</name>
+                <value>6</value>
+                <final>true</final>
+        </property>
+       
+        <!-- algorithm.loops.enabled: allow a node to fire itself more than one time -->
+        <property>      
+                <name>algorithm.loops.enabled</name>
+                <value>false</value>
+                <final>true</final>
+        </property>
+       
+        <!-- algorithm.decay.factor: activation decay factor -->
+        <property>      
+                <name>algorithm.decay.factor</name>
+                <value>0.9</value>
+                <final>true</final>
+        </property>
+       
+        <!-- algorithm.fanout.enabled: divide node output activation by number of outgoing connections -->
+        <property>      
+                <name>algorithm.fanout.enabled</name>
+                <value>false</value>
+                <final>true</final>
+        </property>
+       
+        <!-- files.activations: path in the hdfs of the activation file -->
+        <property>      
+                <name>files.activations</name>
+                <value>conf/activations.dat</value>
+                <final>true</final>
+        </property>
+       
+        <!-- files.weigths: path in the hdfs of the weights file -->
+        <property>      
+                <name>files.weights</name>
+                <value>conf/weights.dat</value>
+                <final>true</final>
+        </property>
+       
+</configuration>
+
