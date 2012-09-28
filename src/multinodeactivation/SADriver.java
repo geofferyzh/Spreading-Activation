@@ -24,7 +24,7 @@ public class SADriver extends Configured implements Tool {
         private static final Logger sLogger = Logger.getLogger(SADriver.class);
         
         // load initial activaion list for looping        
-        public static final String InitialActivationList = "/home/training/workspace/SA_Shaohua/data/Initial_Activation_List.txt";
+        public static final String InitialActivationList = "/.../Initial_Activation_List.txt";
         //Collection<String> activationList;
         //Iterator<String> activationListIter;
         String toBeActivated;
