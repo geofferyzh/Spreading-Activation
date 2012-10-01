@@ -9,6 +9,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -128,7 +129,38 @@ public class SADriver extends Configured implements Tool {
 	                // Inner Loop "Within activation iteration ends" .......................                
                     
 	                sLogger.info("------------------------------ Outer loop activation #" + n_nodes + " finished in " + (float)(System.currentTimeMillis() - time_inner)/1000.0f + " s");
-
+	                
+	                // --------------------------------------------------------------
+	                // Job to Sort the nodes by activation values in descending order
+	                // --------------------------------------------------------------
+	                
+	                Job job = new Job(conf, "Sort by activation value");
+	                job.setJarByClass(SortDriver.class);
+	                job.setMapperClass(SortMapper.class);
+	                job.setReducerClass(SortReducer.class);
+	                
+	                // add a sortcomparator class to sort in descending order
+	                job.setSortComparatorClass(SortFloatComparator.class);
+	                
+	                job.setOutputKeyClass(Text.class);
+	                job.setOutputValueClass(Text.class);
+	                
+	                job.setMapOutputKeyClass(FloatWritable.class);
+	                job.setMapOutputValueClass(Text.class);
+	                
+	                String inputPath = new String();
+	                String outputPath = new String();
+	                
+	                job.setInputFormatClass(VertexInfoInputFormatText.class);
+	                
+	                inputPath = "spreadactivation/Loop" + n_nodes + "output/iter" + step;
+	                outputPath = "spreadactivation/Loop" + n_nodes + "output/finalsort";
+	                FileInputFormat.addInputPath(job, new Path(inputPath));
+	                FileOutputFormat.setOutputPath(job, new Path(outputPath));                                 
+	                
+	                job.waitForCompletion(true);
+	                
+	                
                 } 
                 // Outer Loop "Loop through nodes ends" ...................................
                 
